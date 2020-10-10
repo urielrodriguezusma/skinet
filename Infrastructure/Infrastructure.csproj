@@ -1,8 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201009205448_initialCreate.cs" />
+    <Compile Remove="Migrations\20201009205448_initialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201009205754_initialCreate.cs" />
+    <Compile Remove="Migrations\20201009205754_initialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201009213746_initialCreate.cs" />
+    <Compile Remove="Migrations\20201009213746_initialCreate.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
@@ -20,6 +29,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\SeedData\" />
   </ItemGroup>
 
 </Project>
