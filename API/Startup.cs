@@ -1,3 +1,5 @@
+using API.Helpers;
+using AutoMapper;
 using Core.Repository;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace API
 {
@@ -32,10 +35,12 @@ namespace API
             services.AddDbContext<StoreContext>(opt =>
             {
                 opt.UseSqlite(_configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging();
-                
             });
 
+            services.AddAutoMapper(typeof(MapperProfile));
+            
             services.AddScoped<IProductRepository, ProductRespository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             
         }
 
@@ -48,6 +53,7 @@ namespace API
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
