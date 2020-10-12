@@ -1,15 +1,13 @@
+using API.Extensions;
 using API.Helpers;
+using API.Middleware;
 using AutoMapper;
-using Core.Repository;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Reflection;
 
 namespace API
 {
@@ -37,24 +35,27 @@ namespace API
                 opt.UseSqlite(_configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging();
             });
 
+            services.AddSwaggerDocumentation();
             services.AddAutoMapper(typeof(MapperProfile));
-            
-            services.AddScoped<IProductRepository, ProductRespository>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            
+            services.AddApplicationServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
 
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthorization();
+            app.UserSwaggerDocumentation();
 
             app.UseEndpoints(endpoints =>
             {
