@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Pagination } from './models/pagination';
-import { IProduct } from './models/product';
+import { IPagination } from './shared/models/pagination';
+import { IProduct } from './shared/models/product';
+import { ShopService } from './shop/shop.service';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,11 @@ import { IProduct } from './models/product';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Skynet';
-  products: Array<IProduct>;
-  constructor(private http: HttpClient) {
 
+  constructor() {
   }
 
   ngOnInit() {
-
-    this.http.get('http://localhost:58421/api/products').subscribe((resp: Pagination) => {
-      this.products = resp.data;
-    });
   }
 }
 
