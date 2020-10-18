@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IBrand } from '../shared/models/brand';
 import { IPagination } from '../shared/models/pagination';
+import { IProduct } from '../shared/models/product';
 import { IType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
 
@@ -41,6 +42,10 @@ export class ShopService {
         return resp.body;
       })
     );
+  }
+
+  getProduct(id: number): Observable<IProduct> {
+    return this.http.get<IProduct>(`${this.baseUrl}/products/${id}`);
   }
 
   getBrands(): Observable<IBrand[]> {
