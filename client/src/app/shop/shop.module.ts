@@ -13,7 +13,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
   declarations: [
     ShopComponent,
     ProductItemComponent,
-    ProductDetailsComponent],
+    ProductDetailsComponent
+  ],
   imports: [
     CommonModule,
     ShopRoutingModule,
