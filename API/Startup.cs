@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -33,6 +34,13 @@ namespace API
             services.AddDbContext<StoreContext>(opt =>
             {
                 opt.UseSqlite(_configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging();
+            });
+
+            services.AddSingleton<IConnectionMultiplexer>(opt =>
+            {
+                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+
             });
 
             services.AddSwaggerDocumentation();
