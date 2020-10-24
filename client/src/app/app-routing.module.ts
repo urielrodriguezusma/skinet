@@ -8,6 +8,11 @@ import { TestErrorComponent } from './core/test-error/test-error.component';
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), data: { breadcrumb: 'Home' } },
   { path: 'shop', loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule) },
+  { path: 'basket', loadChildren: () => import('./basket/bastket.module').then(m => m.BastketModule), data: { breadcrump: 'Basket' } },
+  {
+    path: 'checkout', loadChildren: () => import('./checkout/checkout.module')
+                                                  .then(m => m.CheckoutModule), data: { breadcrump: 'Checkout' }
+  },
   { path: 'test-error', component: TestErrorComponent, data: { breadcrumb: 'Test Errors' } },
   { path: 'server-error', component: ServerErrorComponent, data: { breadcrumb: 'Server Errors' } },
   { path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found' } },
