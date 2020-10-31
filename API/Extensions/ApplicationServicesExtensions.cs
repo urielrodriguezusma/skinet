@@ -31,10 +31,11 @@ namespace API.Extensions
 
                     var errorResponse = new ApiValidationErrorResponse
                     {
-                        Errors = errors
+                        Errors = errors,
+                        StatusCode = 422
                     };
                     return new UnprocessableEntityObjectResult(errorResponse);
-                  
+
                 };
             });
 

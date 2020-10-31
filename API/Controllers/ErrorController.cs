@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Errors;
-using Microsoft.AspNetCore.Http;
+﻿using API.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
