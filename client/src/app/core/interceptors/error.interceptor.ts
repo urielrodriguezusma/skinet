@@ -18,12 +18,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError((servErr) => {
                 if (servErr) {
-                    if (servErr.status === 422) {
-                        throw servErr.error;
-                    }
-                    if (servErr.status === 400) {
-                        this.toastr.error(servErr.error.message, servErr.error.statusCode);
-                    }
+
+                    this.toastr.error(servErr.error.message, servErr.error.statusCode);
                     if (servErr.status === 404) {
                         this.router.navigate(['not-found']);
                     }
