@@ -13,7 +13,6 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() label: string;
 
   constructor(@Self() public controlDir: NgControl) {
-
     this.controlDir.valueAccessor = this;
   }
 

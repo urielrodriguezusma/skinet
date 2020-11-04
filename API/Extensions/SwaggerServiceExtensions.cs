@@ -13,7 +13,7 @@ namespace API.Extensions
             {
                 opt.SwaggerDoc("1", new OpenApiInfo { Title = "Skinet API", Version = "v1" });
 
-                var securityItem = new OpenApiSecurityScheme
+                var securitySchema= new OpenApiSecurityScheme
                 {
                     Description = "JWT auth Berar Scheme",
                     Name = "Authorization",
@@ -26,6 +26,10 @@ namespace API.Extensions
                         Id= "Bearer"
                     }
                 };
+
+                opt.AddSecurityDefinition("Bearer", securitySchema);
+                var securityRequirement = new OpenApiSecurityRequirement { { securitySchema, new[] { "Bearer" } } };
+                opt.AddSecurityRequirement(securityRequirement);
             });
 
             return services;

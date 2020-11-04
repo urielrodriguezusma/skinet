@@ -40,8 +40,8 @@ namespace API.Controllers
             var countSpec = new ProductWithFiltersForCountSpecification(producParams);
             var totalItems = await _productRepository.CountAsync(countSpec);
 
-            var data= _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products); 
-            return Ok(new Pagination<ProductToReturnDto>(producParams.PageIndex,producParams.PageSize,totalItems,data));
+            var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
+            return Ok(new Pagination<ProductToReturnDto>(producParams.PageIndex, producParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
@@ -64,7 +64,7 @@ namespace API.Controllers
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
-            var Productbrands = await _productBrandRepo.ListAll();
+            var Productbrands = await _productBrandRepo.ListAllAsync();
             if (Productbrands == null)
             {
                 return NotFound();
@@ -76,10 +76,10 @@ namespace API.Controllers
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
-            var productTypes = await _productTypeRepo.ListAll();
+            var productTypes = await _productTypeRepo.ListAllAsync();
             if (productTypes == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
 
             return Ok(productTypes);
