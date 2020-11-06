@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <div class="table-response">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="border-0 bg-light">
+                        <div class="p-2 px3">
+                            Order
+                        </div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                        <div class="py-2 px3">
+                            Date
+                        </div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                        <div class="py-2 px3">
+                            Total
+                        </div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                        <div class="py-2 px3">
+                            Status
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of (orders$ | async)" (click)="detailOrder(order)">
+                    <td class="align-middle"><strong>#{{order.id}}</strong> </td>
+                    <td class="align-middle">{{order.orderDate | date}} </td>
+                    <td class="align-middle">{{order.total | currency}} </td>
+                    <td class="align-middle">{{order.status}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

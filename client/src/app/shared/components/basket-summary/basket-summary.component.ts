@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
+import { OrderService } from 'src/app/orders/order.service';
 import { IBasket, IBasketItem } from '../../models/basket';
+import { OrderItem } from '../../models/order';
 
 @Component({
   selector: 'app-basket-summary',
@@ -14,13 +16,14 @@ export class BasketSummaryComponent implements OnInit {
   @Output() increment = new EventEmitter<any>();
   @Output() remove = new EventEmitter<any>();
   @Input() isBasket = true;
+  @Input() items: IBasketItem[] | OrderItem[] = [];
+  @Input() isSummary = false;
 
-  basket$: Observable<IBasket>;
 
-  constructor(private basketService: BasketService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.basket$ = this.basketService.basket$;
+
   }
 
   incrementItemQuantity(item: IBasketItem) {

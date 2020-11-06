@@ -12,7 +12,7 @@ export class CheckoutSuccessComponent implements OnInit {
   order: IOrder;
   constructor(private route: Router) {
     const navigation = this.route.getCurrentNavigation();
-    const state = navigation.extras && navigation.extras && navigation.extras.state;
+    const state = navigation && navigation.extras && navigation.extras.state;
     if (state) {
       this.order = state as IOrder;
     }
